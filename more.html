@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classified Case Closed</title>
+
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #32CD32 0%, #000000 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header, footer {
+      background: white;
+      color: gray;
+    }
+
+    nav a {
+      font-weight: 600;
+      transition: 0.3s ease-in-out;
+      color: gray;
+    }
+    nav a:hover {
+      color: #32CD32;
+      letter-spacing: 1px;
+    }
+
+    .banner {
+      background: url('images/banner.jpg') center/cover no-repeat;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 3px 3px 10px #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      animation: floatText 3s infinite ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    .crime-object {
+      position: absolute;
+      opacity: 0.85;
+      animation: floatObject 8s linear infinite, driftX 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes floatObject {
+      0% { transform: translateY(100vh) scale(0.8); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+    }
+    @keyframes driftX {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(15px); }
+    }
+    @keyframes floatText {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .char-card {
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.85);
+      color: #27cc11;
+      border-radius: 12px;
+      padding: 15px;
+    }
+    .char-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 0 25px rgba(9, 10, 0, 0.8);
+    }
+    .char-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .carousel-inner img {
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      padding: 15px 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .tool-card {
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.85);
+      color: #333;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+    }
+    .tool-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+    .tool-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .contact-box {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 25px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    footer {
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="py-3 shadow-lg sticky-top">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <img src="images/logo.png" width="55" height="55" alt="Case Closed Logo" />
+      <h3 class="fw-bold m-0">Detective Conan</h3>
+    </div>
+    <nav>
+      <a href="#home" class="mx-3">Home</a>
+      <a href="#characters" class="mx-3">Characters</a>
+      <a href="#tools" class="mx-3">Detective Tools</a>
+      <a href="#contact" class="mx-3">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HOME / BANNER -->
+<section id="home" class="banner text-center">
+  <h1>Dive in with Mind‑Boggling Cases</h1>
+</section>
+
+<!-- MOVIE CAROUSEL -->
+<div id="conanCarousel" class="carousel slide container mt-5" data-bs-ride="carousel">
+  <div class="carousel-inner rounded shadow-lg">
+    <div class="carousel-item active">
+      <img src="images/oneeyed.jpg" class="d-block w-100" alt="Movie 28">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Detective Conan: One-Eyed Flashback</h5>
+        <p>Detectives Conan and Kogoro Mouri are pulled into a mystery connected to the past of police inspector Kansuke Yamato.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="images/milliondollar.jpg" class="d-block w-100" alt="Movie 27">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Detective Conan: The Million-Dollar Pentagram</h5>
+        <p>The "truth" hidden in the sword cuts through the dark night and leads one under the moon. Love and incidents unfold in turbulent ways. The treasure battle mystery that will divide the world has begun.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="images/blacksub.jpg" class="d-block w-100" alt="Movie 26">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Detective Conan: Black Iron Submarine</h5>
+        <p>An engineer is kidnapped by a black-robed organization while the offshore facility, Pacific Buoy, is prepared for system operation.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#conanCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#conanCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- CHARACTERS -->
+<section id="characters" class="container text-center my-5">
+  <h2 class="fw-bold mb-4">Main Characters</h2>
+  <div class="row g-4">
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/shinichi&conan.webp" alt="Shinichi / Conan">
+        <h5 class="mt-2 fw-bold">Shinichi Kudo</h5>
+        <p>The genius high‑school detective who was transformed into Conan.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Ran_Mouri_Profile.webp" alt="Ran Mouri">
+        <h5 class="mt-2 fw-bold">Ran Mouri</h5>
+        <p>Shinichi’s childhood friend and love interest.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/hattori.jpg" alt="Heiji Hattori">
+        <h5 class="mt-2 fw-bold">Heiji Hattori</h5>
+        <p>High-school detective from Osaka and Shinichi’s rival turn to best friend.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Ai_Haibara_Profile.webp" alt="Ai Haibara">
+        <h5 class="mt-2 fw-bold">Ai Haibara</h5>
+        <p>Creator of APTX 4869 and knows Shinichi’s secret.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Kogoro_After.webp" alt="Mouri Kogoro">
+        <h5 class="mt-2 fw-bold">Mouri Kogoro</h5>
+        <p>The bumbling private detective often called "Sleeping Kogoro".</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/agasa.jpg" alt="Professor Agasa">
+        <h5 class="mt-2 fw-bold">Professor Agasa</h5>
+        <p>Inventor and friend of Conan, providing him detective gadgets.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Ayumi_Yoshida_Profile.webp" alt="Ayumi Yoshida">
+        <h5 class="mt-2 fw-bold">Ayumi Yoshida</h5>
+        <p>Member of the Detective Boys, cheerful and brave.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/200px-Genta_Background_Clear.jpg" alt="Genta Kojima">
+        <h5 class="mt-2 fw-bold">Genta Kojima</h5>
+        <p>Part of the Detective Boys, strong and loves to eat.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/275px-Mitsuhiko_Tsuburaya_Profile.jpg" alt="Mitsuhiko Tsuburaya">
+        <h5 class="mt-2 fw-bold">Mitsuhiko Tsuburaya</h5>
+        <p>Smart and thoughtful member of the Detective Boys.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/kazuha.webp" alt="Kazuha Toyama">
+        <h5 class="mt-2 fw-bold">Kazuha Toyama</h5>
+        <p>Heiji's childhood friend and love interest.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Miwako_Sato_Profile.webp" alt="Officer Sato">
+        <h5 class="mt-2 fw-bold">Officer Sato</h5>
+        <p>Dedicated police officer, often works closely with Kogoro.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/takagikun.jpg" alt="Officer Takagi">
+        <h5 class="mt-2 fw-bold">Officer Takagi</h5>
+        <p>Polite and earnest officer, secretly admires Sato.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="char-card shadow">
+        <img class="char-img" src="images/Megure_After.webp" alt="Inspector Megure">
+        <h5 class="mt-2 fw-bold">Inspector Megure</h5>
+        <p>Experienced detective at the Tokyo Police, often leads investigations.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DETECTIVE TOOLS -->
+<section id="tools" class="container text-center my-5">
+  <h2 class="fw-bold mb-4">Detective Tools</h2>
+  <div class="row g-4">
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/stunwatch.png" alt="Conan's Watch">
+        <h5 class="mt-2 fw-bold">Tranquilizer Watch</h5>
+        <p>Fires a powerful knockout dart to immobilize targets.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/trackingglasses.jpeg" alt="Tracking Glasses">
+        <h5 class="mt-2 fw-bold">Tracking Glasses</h5>
+        <p>Equipped with a tracker to follow suspects.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/bowie.jpeg" alt="Voice‑Changing Bowtie">
+        <h5 class="mt-2 fw-bold">Voice‑Changing Bowtie</h5>
+        <p>Mimics voices to disguise Conan as others.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/powerenhanceshoes.jpeg" alt="Power Enhancing Shoes">
+        <h5 class="mt-2 fw-bold">Power Enhancing Shoes</h5>
+        <p>Enhancing the power and force of his foot movements using built‑in engine.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/elasticity.jpeg" alt="Elastic Suspenders">
+        <h5 class="mt-2 fw-bold">Elastic Suspenders</h5>
+        <p>A strap that extends and retracts to scale buildings.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/badge.jpeg" alt="Detective Badge">
+        <h5 class="mt-2 fw-bold">Detective Badge</h5>
+        <p>A tool used for efficient communication within a mile radius.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="tool-card shadow">
+        <img class="tool-img" src="images/skates.jpg" alt="Skateboard">
+        <h5 class="mt-2 fw-bold">Turbo Engine Skateboard</h5>
+        <p>A skateboard with a small motor, used for fast getaways.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="container my-5 text-center">
+  <h2 class="fw-bold mb-4">Contact Us</h2>
+  <div class="contact-box mx-auto col-md-6">
+    <form>
+      <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+      <input type="email" class="form-control mb-3" placeholder="Your Email" required>
+      <textarea class="form-control mb-3" rows="4" placeholder="Message"></textarea>
+      <button class="btn btn-light px-4">Send</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 WST 249 | All Rights Reserved
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const objects = ['🕵️‍♂️','🩸','🔍','🩹','👣','👟','🎖️','🛹'];
+  const banner = document.querySelector('.banner');
+
+  function createCrimeObject() {
+    const span = document.createElement('span');
+    span.classList.add('crime-object');
+    span.textContent = objects[Math.floor(Math.random() * objects.length)];
+    span.style.left = Math.random() * 100 + '%';
+    span.style.top = (Math.random() * 50 + 50) + '%';
+    span.style.fontSize = (20 + Math.random() * 15) + 'px';
+    span.style.animationDelay = (Math.random() * 4) + 's';
+    banner.appendChild(span);
