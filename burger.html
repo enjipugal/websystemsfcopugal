@@ -2,84 +2,402 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Burger Menu</title>
 
 <style>
-  :root{--nav:#0b6;--bg:#fff;--text:#142;--bar:#fff}
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI;background:var(--bg);color:var(--text)}
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#072;color:#fff}
-  .brand{font-weight:700}
-
-  .hamburger-btn{
-    width:44px;height:44px;border:0;background:transparent;display:flex;justify-content:center;align-items:center;
-    cursor:pointer;position:relative;transition:transform .15s
+  :root {
+    --header-color: rgb(18, 226, 11);
+    --card-bg: rgba(0,0,0,0.05);
+    --text-dark: #000;
+    --accent: rgb(26,156,6);
   }
-  .hamburger-btn .bars{width:30px;height:4px;background:var(--bar);display:block;position:relative;border-radius:2px;transition:all .25s}
-  .hamburger-btn .bars::before,.hamburger-btn .bars::after{content:"";position:absolute;left:0;width:30px;height:4px;background:var(--bar);border-radius:2px;transition:all .25s}}
-  .hamburger-btn .bars::before{top:-8px} .hamburger-btn .bars::after{top:8px}
 
-  .hamburger-btn[aria-expanded="true"] .bars{background:transparent}
-  .hamburger-btn[aria-expanded="true"] .bars::before{transform:translateY(8px) rotate(45deg)}
-  .hamburger-btn[aria-expanded="true"] .bars::after{transform:translateY(-8px) rotate(-45deg)}
-
-  .mobile-panel{
-    position:fixed;inset:0 auto 0 0;width:260px;max-width:80%;height:100vh;background:#fff;color:#111;box-shadow:4px 0 20px rgba(0,0,0,.12);
-    transform:translateX(-110%);transition:transform .28s ease;z-index:60;padding:20px;
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI;
+    background: white;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
-  .mobile-panel.open{transform:translateX(0)}
-  .mobile-panel nav ul{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:8px}
-  .mobile-panel a{display:block;padding:10px 12px;color:#072;text-decoration:none;border-radius:8px;font-weight:700}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .2s}
-  .overlay.show{opacity:1;pointer-events:auto}
-    
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--header-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .brand {
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hamburger-btn .bars,
+  .hamburger-btn .bars::before,
+  .hamburger-btn .bars::after {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background: black;
+    border-radius: 2px;
+    transition: 0.25s all;
+    position: relative;
+  }
+
+  .hamburger-btn .bars::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+  }
+  .hamburger-btn .bars::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+  }
+
+  .hamburger-btn[aria-expanded="true"] .bars {
+    background: transparent;
+  }
+  .hamburger-btn[aria-expanded="true"] .bars::before {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-btn[aria-expanded="true"] .bars::after {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .mobile-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background: #fff;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    transform: translateX(-110%);
+    transition: transform 0.3s ease;
+    z-index: 105;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .mobile-panel.open {
+    transform: translateX(0);
+  }
+
+  .mobile-panel a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .mobile-panel a:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 104;
+  }
+  .overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  main {
+    padding: 80px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1,h2,h4 {
+    color: var(--text-dark);
+  }
+
+  /* About Section */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .about-item {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .about-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 18px rgba(0,0,0,0.2);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .about-content {
+    padding: 15px;
+    color: var(--text-dark);
+  }
+
+  .about-content h4 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+
+  .about-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-tag {
+    background: #eee;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+
+  /* Contact Section */
+  .contact {
+    margin-top: 50px;
+  }
+
+  .contact-content {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(0,0,0,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .contact-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contact-form .form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
   }
 </style>
 </head>
 <body>
+
 <header>
   <div class="brand">WST 249</div>
-  <button class="hamburger-btn" id="hambtn" aria-controls="mobilePanel" aria-expanded="false" aria-label="Open menu">
-    <span class="bars" aria-hidden="true"></span>
+  <button class="hamburger-btn" id="hambtn" aria-expanded="false" aria-label="Open menu">
+    <span class="bars"></span>
   </button>
 </header>
-<div id="mobilePanel" class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
-  <button id="closeBtn" aria-label="Close menu" style="background:none;border:0;padding:6px;cursor:pointer;font-weight:700">Close ✕</button>
-  <nav aria-label="Mobile primary">
-    <ul>
-      <li><a href="#home" onclick="closeMenu()">Home</a></li>
-      <li><a href="#about" onclick="closeMenu()">About</a></li>
-      <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
-      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-    </ul>
-  </nav>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="profile.html" onclick="closeMenu()">Profile</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
-<div id="overlay" class="overlay" tabindex="-1" aria-hidden="true"></div>
+
+<div id="overlay" class="overlay"></div>
+
+<main>
+  <!-- About Section -->
+  <section id="about">
+    <h2 style="text-align:center; margin-bottom:20px;">Common Applications</h2>
+    <div class="about-grid">
+      <div class="about-item">
+        <div class="about-image"><img src="ecom.gif" alt="E-Commerce"></div>
+        <div class="about-content">
+          <h4>E-Commerce</h4>
+          <div class="about-tech">
+            <span class="tech-tag">online stores</span>
+            <span class="tech-tag">shopping carts</span>
+            <span class="tech-tag">payment processing systems</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-item">
+        <div class="about-image"><img src="cms.jpg" alt="CMS"></div>
+        <div class="about-content">
+          <h4>Content Management System</h4>
+          <div class="about-tech">
+            <span class="tech-tag">WordPress</span>
+            <span class="tech-tag">Drupal</span>
+            <span class="tech-tag">Joomia</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-item">
+        <div class="about-image"><img src="socmed.gif" alt="Social Media"></div>
+        <div class="about-content">
+          <h4>Social Media Platform</h4>
+          <div class="about-tech">
+            <span class="tech-tag">connect</span>
+            <span class="tech-tag">share</span>
+            <span class="tech-tag">interact</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-item">
+        <div class="about-image"><img src="pmt.jpg" alt="Project Management"></div>
+        <div class="about-content">
+          <h4>Project Management Tools</h4>
+          <div class="about-tech">
+            <span class="tech-tag">organize tasks</span>
+            <span class="tech-tag">track progress</span>
+            <span class="tech-tag">collaborate online</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-item">
+        <div class="about-image"><img src="web.gif" alt="Web-Based"></div>
+        <div class="about-content">
+          <h4>Web-Based Productivity Suites</h4>
+          <div class="about-tech">
+            <span class="tech-tag">processors</span>
+            <span class="tech-tag">spreadsheets</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-item">
+        <div class="about-image"><img src="info.gif" alt="Information Portal"></div>
+        <div class="about-content">
+          <h4>Information and News Portal</h4>
+          <div class="about-tech">
+            <span class="tech-tag">news</span>
+            <span class="tech-tag">information</span>
+            <span class="tech-tag">articles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="contact-content">
+      <h2>Contact Me</h2>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your.email@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="What's this about?" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="6" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
 <script>
-  const btn = document.getElementById('hambtn');
-  const panel = document.getElementById('mobilePanel');
-  const overlay = document.getElementById('overlay');
-  const closeBtn = document.getElementById('closeBtn');
-  function openMenu(){
-    btn.setAttribute('aria-expanded','true');
-    panel.classList.add('open'); panel.setAttribute('aria-hidden','false');
-    overlay.classList.add('show'); overlay.setAttribute('aria-hidden','false');
-    closeBtn.focus();
+  const btn = document.getElementById("hambtn");
+  const panel = document.getElementById("mobilePanel");
+  const overlay = document.getElementById("overlay");
+
+  function openMenu() {
+    btn.setAttribute("aria-expanded", "true");
+    panel.classList.add("open");
+    overlay.classList.add("show");
   }
-  function closeMenu(){
-    btn.setAttribute('aria-expanded','false');
-    panel.classList.remove('open'); panel.setAttribute('aria-hidden','true');
-    overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true');
-    btn.focus();
+
+  function closeMenu() {
+    btn.setAttribute("aria-expanded", "false");
+    panel.classList.remove("open");
+    overlay.classList.remove("show");
   }
-  btn.addEventListener('click', ()=> {
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
     expanded ? closeMenu() : openMenu();
   });
-  overlay.addEventListener('click', closeMenu);
-  closeBtn.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', (e)=>{if(e.key === 'Escape') closeMenu();});
+
+  overlay.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
   window.closeMenu = closeMenu;
 </script>
+
 </body>
 </html>
