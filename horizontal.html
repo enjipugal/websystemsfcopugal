@@ -2,44 +2,316 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Horizontal Navigation</title>
 
 <style>
   :root{
-    --bg:#ffffff; --nav:rgb(18, 226, 11); --text:rgb(138, 207, 47); --muted:#666;
-  }
-  body{font-family:system-ui,-apple-system,Segoe UI;background:var(--bg);margin:0}
-  nav.horizontal{background:rgb(47, 133, 4);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08)}
-  .container{max-width:1100px;margin:0 auto;padding:0 16px}
-  .horizontal .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-weight:700;letter-spacing:.4px}
-
-  .nav-links{list-style:none;display:flex;gap:18px;margin:0;padding:0}
-  .nav-links a{display:inline-block;padding:10px 12px;color:#fff;text-decoration:none;border-radius:6px;font-weight:600}
-  .nav-links a:hover,.nav-links a:focus{background:rgba(255,255,255,.12);outline:none}
-
-  @media (max-width:640px){
-    .nav-links{display:none}
+    --bg:#ffffff; 
+    --nav:rgb(47, 133, 4);
+    --text:#fff;
+    --muted:#666;
   }
 
+  body{
+    font-family: system-ui, -apple-system, Segoe UI;
+    background: white;
+    margin: 0;
+    color: var(--text-dark);
+  }
+
+  nav.horizontal{
+    background: var(--nav);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+
+  .container{
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .nav-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand{
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .nav-links{
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a{
+    display: inline-block;
+    padding: 10px 12px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .nav-links a:hover{
+    background: rgba(255,255,255,.12);
+  }
+
+  @media(max-width:640px){
+    .nav-links{
+      display: none;
+    }
+  }
+
+  .section-title{
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 35px;
+    color: white;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    padding-bottom: 60px;
+  }
+
+  .about-item {
+    background: rgba(0, 40, 0, 0.45);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .about-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 55px rgba(0, 0, 0, 0.35);
+  }
+
+  .about-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-content {
+    padding: 30px;
+    color: white;
+  }
+
+  .about-content h4{
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .about-content p{
+    opacity: 0.9;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about-tech{
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tech-tag{
+    background: black;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .contact{
+    padding: 60px 0;
+  }
+
+  .contact-content{
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255,255,255,.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  }
+
+  .form-row{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .form-group{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label{
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: white;
+  }
+
+  .form-group input,
+  .form-group textarea{
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+  }
+
+  .submit-btn{
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background: var(--nav);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
 </style>
-
 </head>
+
 <body>
 
-<nav class="horizontal" role="navigation" aria-label="Main">
+<!-- NAV BAR -->
+<nav class="horizontal">
   <div class="container">
     <div class="nav-inner">
       <div class="brand">WST 249</div>
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="profile.html">Profile</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="portfolio">
+  <div class="container">
+    <h2 class="section-title">Major Components</h2>
+    <div class="about-grid">
+
+      <!-- CARD 1 -->
+      <div class="about-item">
+        <div class="about-image">
+          <img src="clientarchi.jpg" alt="Architecture">
+        </div>
+        <div class="about-content">
+          <h4>Client-Server Architecture</h4>
+          <p>A fundamental model where a client sends a request to a server which returns the needed information.</p>
+          <div class="about-tech">
+            <span class="tech-tag">1-Tier</span>
+            <span class="tech-tag">2-Tier</span>
+            <span class="tech-tag">3-Tier</span>
+            <span class="tech-tag">N-Tier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="about-item">
+        <div class="about-image">
+          <img src="browserserver.jpg" alt="Web Browsers">
+        </div>
+        <div class="about-content">
+          <h4>Web Browsers & Servers</h4>
+          <p>Applications that access, display, and deliver content across the internet.</p>
+          <div class="about-tech">
+            <span class="tech-tag">Chrome</span>
+            <span class="tech-tag">Firefox</span>
+            <span class="tech-tag">Edge</span>
+            <span class="tech-tag">Safari</span>
+            <span class="tech-tag">Opera</span>
+            <span class="tech-tag">Apache</span>
+            <span class="tech-tag">Nginx</span>
+            <span class="tech-tag">IIS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="about-item">
+        <div class="about-image">
+          <img src="proto.jpg" alt="Protocols">
+        </div>
+        <div class="about-content">
+          <h4>Protocols</h4>
+          <p>Rules that govern communication over the web, such as HTTP and HTTPS.</p>
+          <div class="about-tech">
+            <span class="tech-tag">Communication</span>
+            <span class="tech-tag">Network</span>
+            <span class="tech-tag">Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-content">
+      <h2 class="section-title">Contact Me</h2>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your.email@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="What's this about?" required>
+        </div>
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="6" placeholder="Tell me about your project..." required></textarea>
+        </div>
+
+        <button class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 </body>
 </html>
