@@ -191,62 +191,6 @@
     font-size: 12px;
   }
 
-  /* Contact Section */
-  .contact {
-    margin-top: 50px;
-  }
-
-  .contact-content {
-    max-width: 700px;
-    margin: auto;
-    background: rgba(0,0,0,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .contact-content h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .contact-form .form-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .form-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  .form-group label {
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-
-  .submit-btn {
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 700;
-    cursor: pointer;
-  }
 </style>
 </head>
 <body>
@@ -260,9 +204,8 @@
 
 <div class="mobile-panel" id="mobilePanel">
   <a href="index.html" onclick="closeMenu()">Home</a>
-  <a href="#about" onclick="closeMenu()">About</a>
   <a href="profile.html" onclick="closeMenu()">Profile</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
 </div>
 
 <div id="overlay" class="overlay"></div>
@@ -340,33 +283,6 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="contact-content">
-      <h2>Contact Me</h2>
-      <form class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" placeholder="Your full name" required />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="your.email@example.com" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Subject</label>
-          <input type="text" placeholder="What's this about?" required />
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea rows="6" placeholder="Tell me about your project..." required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Send Message</button>
-      </form>
-    </div>
-  </section>
 </main>
 
 <script>
