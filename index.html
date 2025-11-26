@@ -19,10 +19,16 @@
         <li><a href="#contact">Contact</a></li>
         <li><a href="product.html" target="_blank">Product</a></li>
         <li><a href="profile.html" target="_blank">Profile</a></li>
-        <li><a href="horizontal.html" target="_blank">Horizontal</a></li>
-        <li><a href="vertical.html" target="_blank">Vertical</a></li>
-        <li><a href="burger.html" target="_blank">Burger</a></li>
         <li><a href="more.html" target="_blank">More</a></li>
+
+        <li class="nav-dropdown">
+          <div class="nav-burger-icon" id="desktopBurger">☰</div>
+            <ul class="nav-dropdown-menu" id="desktopBurgerMenu">
+              <li><a href="horizontal.html">Horizontal</a></li>
+              <li><a href="vertical.html">Vertical</a></li>
+              <li><a href="burger.html">Burger</a></li>
+            </ul>
+        </li>
       </ul>
 
       <!-- Mobile menu toggle (hamburger) -->
@@ -41,12 +47,12 @@
       <li><a href="#about">About</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="../PUGAL Landing Page/index.html" target="_blank">Product</a></li>
-      <li><a href="../PUGAL Profile Page.html" target="_blank">Personal Profile</a></li>
-      <li><a href="horizontal.html" target="_blank">Horizontal</a></li>
-      <li><a href="vertical.html" target="_blank">Vertical</a></li>
-      <li><a href="burger.html" target="_blank">Burger</a></li>
+      <li><a href="product.html" target="_blank">Product</a></li>
+      <li><a href="profile.html" target="_blank">Profile</a></li>
       <li><a href="more.html" target="_blank">More</a></li>
+      <li><a href="horizontal.html">Horizontal</a></li>
+      <li><a href="vertical.html">Vertical</a></li>
+      <li><a href="burger.html">Burger</a></li>
     </ul>
   </div>
 
@@ -246,9 +252,21 @@
     const menu = document.getElementById('mobileMenu');
     toggle.addEventListener('click', () => {
       menu.classList.toggle('active');
+  });
+
+    const burgerIcon = document.getElementById('desktopBurger');
+    const navDropdown = burgerIcon.parentElement;
+
+  burgerIcon.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+  if (!navDropdown.contains(e.target)) {
+    navDropdown.classList.remove('open');
+    }
     });
   </script>
-
 </body>
-
 </html>
